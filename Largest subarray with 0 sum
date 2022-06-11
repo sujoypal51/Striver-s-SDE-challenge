@@ -1,0 +1,31 @@
+// C++ program for the above approach
+#include <bits/stdc++.h>
+using namespace std;
+int maxSubArrayLen(vector<int>arr){
+		
+	map<int,int>hm;
+	hm[0] = 0;
+	int length = -1;
+	int cumSum = 0;
+
+	for (int i = 0; i < arr.size(); i++) {
+		cumSum = cumSum + arr[i];
+
+		if (hm.find(cumSum) != hm.end()) {
+			length = max(length,
+				i + 1 - hm[cumSum]);
+		}
+		else {
+			hm[cumSum] = i + 1;
+		}
+	}
+	return length;
+}
+int main(){
+
+vector<int>arr = {15, -2, 2, -8, 1, 7, 10, 23};
+cout<<maxSubArrayLen(arr)<<endl;
+
+}
+
+
